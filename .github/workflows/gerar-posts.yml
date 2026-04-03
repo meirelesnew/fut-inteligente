@@ -1,0 +1,31 @@
+name: Gerar Posts Automáticos
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # 06h BRT
+    - cron: '0 15 * * *'  # 12h BRT
+    - cron: '0 21 * * *'  # 18h BRT
+  workflow_dispatch:        # permite rodar manualmente
+
+jobs:
+  gerar-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Gerar post via API
+        run: |
+          curl -X POST https://fut-inteligente.onrender.com/api/gerar \
+            -H "Content-Type: application/json" \
+            -d '{"tema": "futebol brasileiro hoje"}'
+
+      - name: Gerar post Flamengo
+        run: |
+          curl -X POST https://fut-inteligente.onrender.com/api/gerar \
+            -H "Content-Type: application/json" \
+            -d '{"tema": "Flamengo últimas notícias"}'
+
+      - name: Gerar post campeonatos
+        run: |
+          curl -X POST https://fut-inteligente.onrender.com/api/gerar \
+            -H "Content-Type: application/json" \
+            -d '{"tema": "tabela brasileirão atualizada"}'
