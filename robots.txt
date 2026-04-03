@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meirelesnew.github.io/fut-inteligente/sitemap.xml

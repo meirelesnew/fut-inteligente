@@ -12,7 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Gerar post via API
+      - name: Acordar o Render
+        run: |
+          curl https://fut-inteligente.onrender.com/ || true
+          sleep 30
+
+      - name: Gerar post futebol brasileiro
         run: |
           curl -X POST https://fut-inteligente.onrender.com/api/gerar \
             -H "Content-Type: application/json" \
