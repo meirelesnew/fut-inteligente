@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fut Inteligente - Notícias, tabelas e análises do futebol brasileiro com IA">
+  <meta name="keywords" content="futebol, flamengo, brasileirão, libertadores, tabela, notícias">
+  <meta property="og:title" content="Fut Inteligente">
+  <meta property="og:description" content="Notícias e tabelas do futebol com inteligência artificial">
+  <title>Fut Inteligente | Futebol com IA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>⚽ Fut Inteligente</h1>
+      <p class="tagline">Futebol com Inteligência Artificial</p>
+      <nav>
+        <a href="#posts">Notícias</a>
+        <a href="#tabelas">Tabelas</a>
+        <a href="#flamengo">Flamengo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Seção de posts -->
+    <section id="posts">
+      <h2>📰 Últimas Notícias</h2>
+      <div id="lista-posts">
+        <p class="carregando">Carregando notícias...</p>
+      </div>
+    </section>
+
+    <!-- Seção Flamengo -->
+    <section id="flamengo">
+      <h2>🔴⚫ Flamengo</h2>
+      <div id="posts-flamengo">
+        <p class="carregando">Carregando...</p>
+      </div>
+    </section>
+
+    <!-- Seção tabelas -->
+    <section id="tabelas">
+      <h2>📊 Tabelas</h2>
+      <div class="tabs">
+        <button class="tab ativo" onclick="carregarTabela('brasileirao')">Brasileirão</button>
+        <button class="tab" onclick="carregarTabela('libertadores')">Libertadores</button>
+        <button class="tab" onclick="carregarTabela('champions')">Champions</button>
+      </div>
+      <div id="tabela-container">
+        <p class="carregando">Carregando tabela...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Fut Inteligente | Powered by IA</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
