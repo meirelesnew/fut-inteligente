@@ -5,32 +5,45 @@ on:
     - cron: '0 9 * * *'   # 06h BRT
     - cron: '0 15 * * *'  # 12h BRT
     - cron: '0 21 * * *'  # 18h BRT
-  workflow_dispatch:        # permite rodar manualmente
+  workflow_dispatch:
 
 jobs:
   gerar-post:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Acordar o Render
+      - name: Acordar o Render (tentativa 1)
+        run: curl -s https://fut-inteligente.onrender.com/ || true
+
+      - name: Aguardar 60 segundos
+        run: sleep 60
+
+      - name: Verificar se está online
         run: |
-          curl https://fut-inteligente.onrender.com/ || true
-          sleep 30
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://fut-inteligente.onrender.com/)
+          echo "Status do servidor: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "Servidor ainda não respondeu, aguardando mais 30s..."
+            sleep 30
+          fi
 
       - name: Gerar post futebol brasileiro
         run: |
-          curl -X POST https://fut-inteligente.onrender.com/api/gerar \
+          RESP=$(curl -s -X POST https://fut-inteligente.onrender.com/api/gerar \
             -H "Content-Type: application/json" \
-            -d '{"tema": "futebol brasileiro hoje"}'
+            -d '{"tema": "futebol brasileiro hoje"}')
+          echo "Resposta: $RESP"
 
       - name: Gerar post Flamengo
         run: |
-          curl -X POST https://fut-inteligente.onrender.com/api/gerar \
+          RESP=$(curl -s -X POST https://fut-inteligente.onrender.com/api/gerar \
             -H "Content-Type: application/json" \
-            -d '{"tema": "Flamengo últimas notícias"}'
+            -d '{"tema": "Flamengo últimas notícias"}')
+          echo "Resposta: $RESP"
 
       - name: Gerar post campeonatos
         run: |
-          curl -X POST https://fut-inteligente.onrender.com/api/gerar \
+          RESP=$(curl -s -X POST https://fut-inteligente.onrender.com/api/gerar \
             -H "Content-Type: application/json" \
-            -d '{"tema": "tabela brasileirão atualizada"}'
+            -d '{"tema": "tabela brasileirão atualizada"}')
+          echo "Resposta: $RESP"
