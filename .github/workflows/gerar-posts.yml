@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Acordar o Render (tentativa 1)
+      - name: Acordar o Render
         run: curl -s https://fut-inteligente.onrender.com/ || true
 
       - name: Aguardar 60 segundos
@@ -21,9 +21,8 @@ jobs:
       - name: Verificar se está online
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://fut-inteligente.onrender.com/)
-          echo "Status do servidor: $STATUS"
+          echo "Status: $STATUS"
           if [ "$STATUS" != "200" ]; then
-            echo "Servidor ainda não respondeu, aguardando mais 30s..."
             sleep 30
           fi
 
@@ -31,6 +30,7 @@ jobs:
         run: |
           RESP=$(curl -s -X POST https://fut-inteligente.onrender.com/api/gerar \
             -H "Content-Type: application/json" \
+            -H "x-api-token: ${{ secrets.API_TOKEN }}" \
             -d '{"tema": "futebol brasileiro hoje"}')
           echo "Resposta: $RESP"
 
@@ -38,6 +38,7 @@ jobs:
         run: |
           RESP=$(curl -s -X POST https://fut-inteligente.onrender.com/api/gerar \
             -H "Content-Type: application/json" \
+            -H "x-api-token: ${{ secrets.API_TOKEN }}" \
             -d '{"tema": "Flamengo últimas notícias"}')
           echo "Resposta: $RESP"
 
@@ -45,5 +46,6 @@ jobs:
         run: |
           RESP=$(curl -s -X POST https://fut-inteligente.onrender.com/api/gerar \
             -H "Content-Type: application/json" \
+            -H "x-api-token: ${{ secrets.API_TOKEN }}" \
             -d '{"tema": "tabela brasileirão atualizada"}')
           echo "Resposta: $RESP"

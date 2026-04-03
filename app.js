@@ -1,22 +1,22 @@
 const API = 'https://fut-inteligente.onrender.com';
 
-// Carregar posts ao abrir a página
 document.addEventListener('DOMContentLoaded', () => {
   carregarPosts();
-  carregarTabela('brasileirao');
+  carregarTabela('brasileirao', document.querySelector('.tab.ativo'));
 });
 
-// Buscar e exibir posts
 async function carregarPosts() {
   try {
     const res = await fetch(`${API}/api/posts`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const posts = await res.json();
 
     const lista = document.getElementById('lista-posts');
     const flamengo = document.getElementById('posts-flamengo');
 
-    if (posts.length === 0) {
+    if (!posts.length) {
       lista.innerHTML = '<p class="carregando">Nenhum post ainda.</p>';
+      flamengo.innerHTML = '<p class="carregando">Nenhum post ainda.</p>';
       return;
     }
 
@@ -24,46 +24,57 @@ async function carregarPosts() {
     flamengo.innerHTML = '';
 
     posts.forEach(post => {
-      const card = `
-        <div class="card" onclick="abrirPost('${post.slug}')">
-          <h3>${post.titulo}</h3>
-          <p>${post.resumo || ''}</p>
-          <div class="data">${new Date(post.criadoEm).toLocaleDateString('pt-BR')}</div>
-        </div>
-      `;
-      lista.innerHTML += card;
+      // ✅ Sem innerHTML para texto — previne XSS
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.onclick = () => abrirPost(post.slug);
 
-      // Posts do Flamengo na seção especial
+      const titulo = document.createElement('h3');
+      titulo.textContent = post.titulo;
+
+      const resumo = document.createElement('p');
+      resumo.textContent = post.resumo || '';
+
+      const data = document.createElement('div');
+      data.className = 'data';
+      data.textContent = new Date(post.criadoEm).toLocaleDateString('pt-BR');
+
+      card.appendChild(titulo);
+      card.appendChild(resumo);
+      card.appendChild(data);
+
+      lista.appendChild(card.cloneNode(true));
+
       if (post.tags && post.tags.includes('flamengo')) {
-        flamengo.innerHTML += card;
+        flamengo.appendChild(card);
       }
     });
 
   } catch (err) {
+    console.error('Erro ao carregar posts:', err);
     document.getElementById('lista-posts').innerHTML =
       '<p class="erro">Erro ao carregar posts.</p>';
   }
 }
 
-// Abrir post individual
 function abrirPost(slug) {
   window.location.href = `post.html?slug=${slug}`;
 }
 
-// Carregar tabela de campeonato
-async function carregarTabela(liga) {
+// ✅ Corrigido: recebe btn como parâmetro explícito
+async function carregarTabela(liga, btn) {
   const container = document.getElementById('tabela-container');
   container.innerHTML = '<p class="carregando">Carregando tabela...</p>';
 
-  // Atualizar botão ativo
-  document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('ativo'));
-  event.target.classList.add('ativo');
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('ativo'));
+  if (btn) btn.classList.add('ativo');
 
   try {
     const res = await fetch(`${API}/api/tabelas/${liga}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const dados = await res.json();
 
-    if (!dados || dados.length === 0) {
+    if (!dados || !dados.length) {
       container.innerHTML = '<p class="carregando">Tabela não disponível.</p>';
       return;
     }
@@ -106,6 +117,7 @@ async function carregarTabela(liga) {
     container.innerHTML = html;
 
   } catch (err) {
+    console.error('Erro ao carregar tabela:', err);
     container.innerHTML = '<p class="erro">Erro ao carregar tabela.</p>';
   }
 }
