@@ -1,6 +1,8 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY, {
+  apiVersion: 'v1beta'
+});
 
 async function gerarPost(tema) {
   console.log(`🤖 Gerando post sobre: ${tema}`);
@@ -25,16 +27,15 @@ async function gerarPost(tema) {
   try {
     const result = await model.generateContent(prompt);
     const texto = result.response.text();
-    console.log(`📝 Resposta bruta da IA (primeiros 200 chars): ${texto.slice(0, 200)}`);
+    console.log(`📝 Resposta bruta (200 chars): ${texto.slice(0, 200)}`);
 
-    // Limpar resposta
     const json = texto
       .replace(/```json/g, '')
       .replace(/```/g, '')
       .trim();
 
     const parsed = JSON.parse(json);
-    console.log(`✅ Post parseado com sucesso: ${parsed.titulo}`);
+    console.log(`✅ Post parseado: ${parsed.titulo}`);
     return parsed;
 
   } catch (err) {
