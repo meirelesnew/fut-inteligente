@@ -159,3 +159,69 @@ footer {
   font-size: 0.85rem;
   margin-top: 60px;
 }
+/* Tabela wrapper responsivo */
+.tabela-wrapper {
+  overflow-x: auto;
+}
+
+.flamengo-row {
+  background: rgba(230, 51, 41, 0.1) !important;
+  border-left: 3px solid #e63329;
+}
+
+.time-nome {
+  min-width: 120px;
+}
+
+/* Jogos */
+.jogos-lista {
+  display: grid;
+  gap: 12px;
+}
+
+.jogo-card {
+  background: #1a1a1a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.jogo-card:hover {
+  border-color: #e63329;
+}
+
+.jogo-data {
+  font-size: 0.8rem;
+  color: #e63329;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.jogo-times {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.time {
+  flex: 1;
+  font-weight: 600;
+}
+
+.time.destaque {
+  color: #e63329;
+}
+
+.vs {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.jogo-local {
+  font-size: 0.75rem;
+  color: #666;
+}

@@ -4,44 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- SEO Básico -->
-  <title>Fut Inteligente | Notícias de Futebol com IA - Flamengo, Brasileirão e mais</title>
-  <meta name="description" content="Fut Inteligente traz as últimas notícias do futebol brasileiro com inteligência artificial. Tabelas do Brasileirão, Libertadores, Champions League e cobertura completa do Flamengo.">
-  <meta name="keywords" content="futebol, flamengo, brasileirão, libertadores, champions league, tabela futebol, noticias futebol, futebol hoje">
+  <!-- SEO -->
+  <title>Fut Inteligente | Tabelas e Notícias de Futebol - Brasileirão, Premier League, La Liga</title>
+  <meta name="description" content="Acompanhe as tabelas atualizadas do Brasileirão, Premier League, La Liga e Copa do Mundo. Notícias do Flamengo e do futebol mundial com inteligência artificial.">
+  <meta name="keywords" content="futebol, flamengo, brasileirão tabela, premier league tabela, la liga tabela, copa do mundo 2026, futebol hoje, noticias futebol">
   <meta name="author" content="Fut Inteligente">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://meirelesnew.github.io/fut-inteligente/">
 
-  <!-- Open Graph (WhatsApp, Facebook) -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Fut Inteligente | Notícias de Futebol com IA">
-  <meta property="og:description" content="Últimas notícias do futebol brasileiro com inteligência artificial. Flamengo, Brasileirão, Libertadores e mais.">
+  <meta property="og:title" content="Fut Inteligente | Tabelas e Notícias de Futebol">
+  <meta property="og:description" content="Tabelas atualizadas do Brasileirão, Premier League, La Liga e Copa do Mundo 2026. Notícias do Flamengo com IA.">
   <meta property="og:url" content="https://meirelesnew.github.io/fut-inteligente/">
   <meta property="og:site_name" content="Fut Inteligente">
   <meta property="og:locale" content="pt_BR">
 
-  <!-- Twitter Card -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Fut Inteligente | Notícias de Futebol com IA">
-  <meta name="twitter:description" content="Últimas notícias do futebol brasileiro com inteligência artificial.">
+  <meta name="twitter:title" content="Fut Inteligente | Tabelas e Notícias de Futebol">
+  <meta name="twitter:description" content="Tabelas atualizadas e notícias do futebol mundial com IA.">
 
-  <!-- Schema.org (Google) -->
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Fut Inteligente",
     "url": "https://meirelesnew.github.io/fut-inteligente/",
-    "description": "Notícias de futebol brasileiro com inteligência artificial",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://meirelesnew.github.io/fut-inteligente/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "description": "Tabelas e notícias de futebol com inteligência artificial",
+    "inLanguage": "pt-BR"
   }
   </script>
 
-  <meta name="google-site-verification" content="LmGrfoKNCN8loobMkkhbQD7XJZd8Tmi6GRWYptug_6k" />
+  <meta name="google-site-verification" content="LmGrfoKNCN8loobMkkhbQD7XJZd8Tmi6GRWYptug_6k">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -53,6 +49,7 @@
       <nav>
         <a href="#posts">Notícias</a>
         <a href="#tabelas">Tabelas</a>
+        <a href="#jogos">Jogos</a>
         <a href="#flamengo">Flamengo</a>
       </nav>
     </div>
@@ -60,6 +57,7 @@
 
   <main class="container">
 
+    <!-- Notícias -->
     <section id="posts">
       <h2>📰 Últimas Notícias</h2>
       <div id="lista-posts">
@@ -67,6 +65,7 @@
       </div>
     </section>
 
+    <!-- Flamengo -->
     <section id="flamengo">
       <h2>🔴⚫ Flamengo</h2>
       <div id="posts-flamengo">
@@ -74,15 +73,30 @@
       </div>
     </section>
 
+    <!-- Tabelas -->
     <section id="tabelas">
-      <h2>📊 Tabelas</h2>
+      <h2>📊 Tabelas de Classificação</h2>
       <div class="tabs">
-        <button class="tab ativo" onclick="carregarTabela('brasileirao', this)">Brasileirão</button>
-        <button class="tab" onclick="carregarTabela('libertadores', this)">Libertadores</button>
-        <button class="tab" onclick="carregarTabela('champions', this)">Champions</button>
+        <button class="tab ativo" onclick="carregarTabela('brasileirao', this)">🇧🇷 Brasileirão</button>
+        <button class="tab" onclick="carregarTabela('premier', this)">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier</button>
+        <button class="tab" onclick="carregarTabela('laliga', this)">🇪🇸 La Liga</button>
+        <button class="tab" onclick="carregarTabela('copamundo', this)">🌍 Copa 2026</button>
       </div>
       <div id="tabela-container">
         <p class="carregando">Carregando tabela...</p>
+      </div>
+    </section>
+
+    <!-- Próximos Jogos -->
+    <section id="jogos">
+      <h2>🗓️ Próximos Jogos</h2>
+      <div class="tabs">
+        <button class="tab-jogo ativo" onclick="carregarJogos('brasileirao', this)">🇧🇷 Brasileirão</button>
+        <button class="tab-jogo" onclick="carregarJogos('premier', this)">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier</button>
+        <button class="tab-jogo" onclick="carregarJogos('laliga', this)">🇪🇸 La Liga</button>
+      </div>
+      <div id="jogos-container">
+        <p class="carregando">Carregando jogos...</p>
       </div>
     </section>
 
@@ -96,6 +110,5 @@
   </footer>
 
   <script src="app.js"></script>
-
 </body>
 </html>
